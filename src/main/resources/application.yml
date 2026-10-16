@@ -1,0 +1,22 @@
+spring:
+  application:
+    name: mock-payment-gateway
+  config:
+    # Biến môi trường (MOCKPAY_API_KEY, MOCKPAY_WEBHOOK_SECRET) đọc từ ../infra/.env (tạo bằng infra/scripts/init-env.sh)
+    import: "optional:file:../infra/.env[.properties],optional:file:.env[.properties]"
+
+server:
+  port: 9090
+
+mockpay:
+  api-key: ${MOCKPAY_API_KEY}
+  webhook-secret: ${MOCKPAY_WEBHOOK_SECRET}
+  public-base-url: http://localhost:9090
+  webhook:
+    # Lần thử lại thứ k chờ retry-base-delay * 2^(k-1): 2, 4, 8, 16, 32 giây
+    retry-base-delay: 2s
+    # Tổng số lần gửi tối đa cho một webhook (lần đầu + 5 lần thử lại)
+    max-attempts: 6
+    # Merchant không trả lời trong khoảng này coi như thất bại và được gửi lại
+    timeout: 5s
+    connect-timeout: 2s
