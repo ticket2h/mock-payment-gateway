@@ -16,7 +16,7 @@ Module `mock-payment-gateway`, Spring Boot, cổng 9090, lưu dữ liệu trong 
   "amount": 4600000,
   "currency": "VND",
   "description": "Ticket2h order c0de...",
-  "returnUrl": "http://localhost:8080/payments/return",
+  "returnUrl": "http://localhost:5173/payments/return?orderId=7c9e...",
   "notifyUrl": "http://localhost:8080/webhooks/payments/mockpay",
   "expiresInSeconds": 900
 }
